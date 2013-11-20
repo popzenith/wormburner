@@ -1,0 +1,4 @@
+Golfpals
+========================
+
+GolfPals is a new social network for golfers. You’ll be able to plan outings with your friends, make tee times, and post your scores and photos.

@@ -1,0 +1,17 @@
+<div class="span6 offset3">
+<h2><%= @user.name %></h2>
+
+<%= render 'layouts/messages' %>
+
+<div class="profile">
+  <div class="profilephoto">
+    <%= image_tag @user.photo.url(:small) %>
+  </div>
+</div>
+<br />
+<div class="profile">
+  <%= render 'follow_form' %>
+</div>
+</div>
+
+
