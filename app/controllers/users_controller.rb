@@ -34,7 +34,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json  { render :json=> { 
-        :users=>@users.as_json(:only => [:id, :name], :methods => [:photo_url], :include => {:reverse_relationships => { :only => [:id, :followed_id, :follower_id ] }} )
+        :users=>@users.as_json(:only => [:id, :name, :invitation_token], :methods => [:photo_url], :include => {:reverse_relationships => { :only => [:id, :followed_id, :follower_id, :status ] }} )
         } }
     end
   end
@@ -56,7 +56,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json  { render :json=> { 
-        :user=>@user.as_json(:only => [:id, :name, :email], :methods => [:photo_url], :include => {:reverse_relationships => { :only => [:id, :followed_id, :follower_id ] }} )
+        :user=>@user.as_json(:only => [:id, :name, :email, :invitation_token], :methods => [:photo_url], :include => {:reverse_relationships => { :only => [:id, :followed_id, :follower_id, :status ] }} )
         } }
     end
   end
@@ -111,7 +111,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json  { render :json => {
-        :user=>@user.as_json(:only => [:id, :name], :methods => [:photo_url], :include => {:reverse_relationships => { :only => [:id, :followed_id, :follower_id ] }} )
+        :user=>@user.as_json(:only => [:id, :name], :methods => [:photo_url], :include => {:reverse_relationships => { :only => [:id, :followed_id, :follower_id, :status ] }} )
       } }
     end
   end

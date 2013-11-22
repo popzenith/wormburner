@@ -51,13 +51,13 @@ class User < ActiveRecord::Base
     relationships.find_by_followed_id(other_user.id)
   end
 
-  def follow!(other_user)
-    relationships.create!(followed_id: other_user.id)
+  def follow!(other_user, status)
+    relationships.create!(followed_id: other_user.id, status: status)
   end
 
-  def unfollow!(other_user)
-    relationships.find_by_followed_id(other_user.id).destroy
-  end
+  #def unfollow!(other_user)
+  #  relationships.find_by_followed_id(other_user.id).destroy
+  #end
 
   def photo_url
     photo.url(:small)

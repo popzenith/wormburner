@@ -27,8 +27,13 @@ Golfpals::Application.routes.draw do
   # related models
   #########################################
   resources :microposts, only: [:create, :destroy]
-  resources :relationships, only: [:create, :destroy, :show]
   resources :tokens,:only => [:create, :destroy]
+  resources :relationships, only: [:create, :destroy, :show] do
+    member do
+      post :updatestatus
+    end
+  end
+  
 
   #########################################
   # email forms
