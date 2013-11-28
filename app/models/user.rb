@@ -28,6 +28,10 @@ class User < ActiveRecord::Base
                                    class_name:  "Relationship",
                                    dependent:   :destroy
   has_many :followers, through: :reverse_relationships, source: :follower
+  has_many :friend_requests, :through => :reverse_relationships, 
+            :class_name => "User", 
+            :source => :follower, 
+            :conditions => ['relationships.status = ?',"REQUEST"]
 
   #########################################
   # paperclip profile photo

@@ -19,7 +19,7 @@ Golfpals::Application.routes.draw do
   resources :users do
     # added GETs for all these to customize data we get about a user
     member do
-      get :following, :followers, :friends, :microposts, :feed, :feedpopular, :valid, :search, :searchemail
+      get :following, :followers, :friends, :friendrequests, :microposts, :feed, :feedpopular, :valid, :search, :searchemail
     end
   end
 

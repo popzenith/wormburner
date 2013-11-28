@@ -17,7 +17,7 @@ class RelationshipsController < ApplicationController
   end
 
   #########################################
-  # stop following someone (keep the record)
+  # update relationship (keep the record)
   #########################################
   def updatestatus
     @relationship = Relationship.find(params[:id])

@@ -11,12 +11,12 @@ user.follow!(User.find_by_name("J.L. Novosad"), "FRIENDS")
 user = User.create! :name => "Jake Trout", :email => "test3@golfpals.co", :password => "foobar", :password_confirmation => "foobar"
 user.microposts.create!(content: "Are we doing this?")
 user.microposts.create!(content: "Say hi to Jimmy, the manager")
-user.follow!(User.find_by_name("J.L. Novosad"), "FRIENDS")
+user.follow!(User.find_by_name("J.L. Novosad"), "REQUEST")
 
 user = User.create! :name => "Sandeee", :email => "test4@golfpals.co", :password => "foobar", :password_confirmation => "foobar"
 user.microposts.create!(content: "most of the fairways and greens were well taken care of and the design of the course had a good combination of interesting and challenging holes as well as some more straight forward ones.")
 user.microposts.create!(content: "woooooooooooo")
-user.follow!(User.find_by_name("J.L. Novosad"), "FRIENDS")
+user.follow!(User.find_by_name("J.L. Novosad"), "REQUEST")
 
 user = User.create! :name => "Kima O'Connor", :email => "test5@golfpals.co", :password => "foobar", :password_confirmation => "foobar"
 user.microposts.create!(content: "Gooooooose")

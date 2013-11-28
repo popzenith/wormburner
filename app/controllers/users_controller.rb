@@ -39,6 +39,19 @@ class UsersController < ApplicationController
     end
   end
 
+  # friend requests
+  def friendrequests
+    @title = "Friend Requests"
+    @user = User.find(params[:id])
+    @users = @user.friend_requests
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json  { render :json=> { 
+        :users=>@users.as_json(:only => [:id, :name], :methods => [:photo_url], :include => {:relationships => { :only => [:id, :followed_id, :follower_id, :status ] }} )
+        } }
+    end
+  end
+
   # search one user email
   def searchemail
     
