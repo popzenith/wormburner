@@ -5,13 +5,22 @@ class RelationshipsController < ApplicationController
   # follow another user
   #########################################
   def create
+
+    # other user
     @user = User.find(params[:relationship][:followed_id])
+
+    # create relationship
     current_user.follow!(@user, params[:relationship][:status])
+    if @user.name.nil?
+      @user.update_attributes!(:notify => "YES", :name => @user.email)
+    else
+      @user.update_attributes!(:notify => "YES")
+    end
+
     respond_to do |format|
-      format.html { redirect_to @user }
-      format.js 
-      format.json  { render :json => {
-        :user=>@user.as_json(:only => [:id, :name, :email], :methods => [:photo_url], :include => {:reverse_relationships => { :only => [:id, :followed_id, :follower_id, :status ] }} )
+      format.html # index.html.erb
+      format.json  { render :json=> { 
+        :user=>@user.as_json(:only => [:id, :name, :invitation_token, :notify], :methods => [:photo_url]) 
       } }
     end
   end
@@ -20,33 +29,53 @@ class RelationshipsController < ApplicationController
   # update relationship (keep the record)
   #########################################
   def updatestatus
+
+    # other user
     @relationship = Relationship.find(params[:id])
-    @user = @relationship.followed
+    status = params[:relationship][:status]
+    
+    # create relationship
     if current_user.id == @relationship.follower_id 
-      @relationship.status = params[:relationship][:status]
+
+      @relationship.status = status
       @relationship.save
+      @user = User.find(@relationship.followed_id)
+      if status == "FOLLOWING" || status == "REQUEST"
+        @user.update_attributes!(:notify => "YES")
+      end
+
       respond_to do |format|
-        format.html { redirect_to @user }
-        format.js
-        format.json  { render :json => {
-          :user=>@user.as_json(:only => [:id, :name, :email], :methods => [:photo_url], :include => {:reverse_relationships => { :only => [:id, :followed_id, :follower_id, :status ] }} )
+        format.html # index.html.erb
+        format.json  { render :json=> { 
+          :user=>@user.as_json(:only => [:id, :name, :invitation_token, :notify], :methods => [:photo_url]) 
         } }
       end
-    else
-      redirect_to root_url
     end
   end
 
   #########################################
-  # stop following someone (old way was to destroy)
+  # confirm a follow
   #########################################
-  def destroy
-    @user = Relationship.find(params[:id]).followed
-    current_user.unfollow!(@user)
-    respond_to do |format|
-      format.html { redirect_to @user }
-      format.js
-      format.json { render :json => @user }
+  def confirmfollow
+
+    # other user
+    @relationship = Relationship.find(params[:id])
+    status = params[:relationship][:status]
+    
+    # create relationship
+    if current_user.id == @relationship.followed_id 
+
+      @relationship.status = status
+      @relationship.save
+      @user = User.find(@relationship.follower_id)
+
+      respond_to do |format|
+        format.html # index.html.erb
+        format.json  { render :json=> { 
+          :user=>@user.as_json(:only => [:id, :name, :invitation_token, :notify], :methods => [:photo_url]) 
+        } }
+      end
     end
   end
+
 end

@@ -11,10 +11,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 51) do
+ActiveRecord::Schema.define(version: 90) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "favorites", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "venue_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "favorites", ["user_id", "venue_id"], name: "index_favorites_on_user_id_and_venue_id", using: :btree
+
+  create_table "micropost_users", force: true do |t|
+    t.integer  "micropost_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "micropost_users", ["micropost_id"], name: "index_micropost_users_on_micropost_id", using: :btree
+  add_index "micropost_users", ["user_id"], name: "index_micropost_users_on_user_id", using: :btree
 
   create_table "microposts", force: true do |t|
     t.text     "content"
@@ -77,6 +96,7 @@ ActiveRecord::Schema.define(version: 51) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
+    t.string   "notify"
   end
 
   add_index "users", ["authentication_token"], name: "index_users_on_authentication_token", unique: true, using: :btree
@@ -91,5 +111,13 @@ ActiveRecord::Schema.define(version: 51) do
   end
 
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
+
+  create_table "venues", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "venues", ["created_at"], name: "index_venues_on_created_at", using: :btree
 
 end

@@ -3,8 +3,9 @@ class Micropost < ActiveRecord::Base
   #########################################
   # Setup accessible (or protected) attributes for your model
   #########################################
-  attr_accessible :content, :photo
+  attr_accessible :content, :venue_id, :photo, :users
   belongs_to :user
+  belongs_to :venue
 
   #########################################
   # I dont have validates set up for all my things, perhaps i do?
@@ -18,6 +19,15 @@ class Micropost < ActiveRecord::Base
   #########################################
   has_attached_file :photo, :styles => { :small => "640x640#" },
                             :default_url => 'missing_photo.png'
+
+  #########################################
+  # tag users
+  #########################################
+  has_many :micropost_users, dependent: :destroy
+  has_many :users,
+            -> { uniq },
+            :through => :micropost_users,
+            class_name: "User"                        
 
   #########################################
   # an actually db query, the controller uses these
@@ -36,6 +46,10 @@ class Micropost < ActiveRecord::Base
                          AND status = 'FRIENDS'"
     where("user_id IN (#{followers_user_ids})", 
           user_id: user.id)
+  end
+
+  def self.from_venue(venue)
+    where("venue_id = ?", venue.id)
   end
 
   def photo_url

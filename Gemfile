@@ -13,7 +13,6 @@ gem 'uglifier', '>= 1.3.0'
 # design
 gem "bootstrap-sass", ">= 2.0.4.0"
 gem 'jquery-rails'
-gem 'turbolinks'
 
 # profiles
 gem 'devise', '~> 3.0.0.rc'
@@ -25,12 +24,20 @@ gem "rolify", ">= 3.2.0"
 # pages
 gem 'will_paginate', '3.0.3'
 gem 'bootstrap-will_paginate', '0.0.6'
-gem 'simple_form', :git => 'git://github.com/plataformatec/simple_form.git'
 
 # util
 gem 'faker', '0.3.1'
 gem "paperclip", "~> 3.1"
 gem 'hirb'
+gem 'aws-sdk'
 
 # upgrade
 gem 'protected_attributes'
+
+#mail
+gem 'mandrill-api'
+
+# heroku
+group :production do
+  gem 'rails_12factor'
+end

@@ -16,24 +16,40 @@ Golfpals::Application.routes.draw do
   #########################################
   # the users
   #########################################
-  resources :users do
+  resources :users, only: [:index, :create, :show, :update]  do
     # added GETs for all these to customize data we get about a user
     member do
-      get :following, :followers, :friends, :friendrequests, :microposts, :feed, :feedpopular, :valid, :search, :searchemail
+      get :following, :following_count, :followers, :followers_count, :recentfollowers, :friendrequests, :friends, :myrelationship, :myreverserelationship, :venues, :microposts, :feed, :valid, :search
+    end
+    member do
+      post :searchemail, :invitationemailonly, :refreshnotify, :blockuser
     end
   end
 
   #########################################
-  # related models
+  # user related models
   #########################################
-  resources :microposts, only: [:create, :destroy]
-  resources :tokens,:only => [:create, :destroy]
-  resources :relationships, only: [:create, :destroy, :show] do
+  resources :microposts, only: [:create, :destroy] do
     member do
-      post :updatestatus
+      post :taguser
     end
   end
-  
+  resources :tokens,:only => [:create, :destroy]
+  resources :relationships, only: [:create, :destroy] do
+    member do
+      post :updatestatus, :confirmfollow
+    end
+  end
+
+  #########################################
+  # the venues
+  #########################################
+  resources :venues, only: [:index, :create] do 
+    member do
+      post :favorite, :unfavorite
+      get :feed
+    end
+  end
 
   #########################################
   # email forms
