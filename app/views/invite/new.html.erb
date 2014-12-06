@@ -3,7 +3,7 @@
 
 <%= render 'layouts/messages' %>
 
-<%= simple_form_for @message, :url => invite_path do |f| %>
+<%= form_for @message, :url => invite_path do |f| %>
   
   <%= f.hidden_field :subject, :value => "Invite a Friend" %>
 
