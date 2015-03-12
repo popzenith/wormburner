@@ -1,5 +1,7 @@
 class RegistrationsController < Devise::RegistrationsController
   
+  respond_to :html, :json
+  
   before_filter :authenticate_user!
 
   # need this to add custom 'name' field to devise in Rails 4
@@ -48,7 +50,6 @@ class RegistrationsController < Devise::RegistrationsController
 
   def destroy_if_previously_invited
     invitation_info = {}
-    tempfollowers = []
 
     user_hash = params[:user]
     if user_hash && user_hash[:email]
@@ -58,13 +59,6 @@ class RegistrationsController < Devise::RegistrationsController
         invitation_info[:invitation_sent_at] = @user[:invitation_sent_at]
         invitation_info[:invited_by_id] = @user[:invited_by_id]
         invitation_info[:invited_by_type] = @user[:invited_by_type]
-
-        # need to save friends here also
-        if @user.followers.any? 
-          @user.followers.each do |follower|
-            tempfollowers << follower
-          end
-        end
 
         @user.destroy
       end
@@ -82,13 +76,6 @@ class RegistrationsController < Devise::RegistrationsController
       @user[:invitation_sent_at] = invitation_info[:invitation_sent_at]
       @user[:invited_by_id] = invitation_info[:invited_by_id]
       @user[:invited_by_type] = invitation_info[:invited_by_type]
-
-      # add friends
-      if tempfollowers.any?
-        tempfollowers.each do |follower|
-          follower.follow!(@user, "REQUEST")
-        end
-      end
 
       @user.save!
     end

@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Golfpals::Application.config.secret_key_base = '832c4a4d7d1d7db3d9dfe48e1e7c05202fcadf95eb894033fcfe4e1987ca6e0b5f2a054a885d9e166ad06b98b3c70a70aad731293c15d32931be8651a42f415f'
+WormBurner::Application.config.secret_key_base = '832c4a4d7d1d7db3d9dfe48e1e7c05202fcadf95eb894033fcfe4e1987ca6e0b5f2a054a885d9e166ad06b98b3c70a70aad731293c15d32931be8651a42f415f'

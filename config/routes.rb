@@ -1,4 +1,4 @@
-Golfpals::Application.routes.draw do
+WormBurner::Application.routes.draw do
   
 	#########################################
   # If you are logged in or not logged in you still go to the home page, but you could go to different places
@@ -17,39 +17,54 @@ Golfpals::Application.routes.draw do
   # the users
   #########################################
   resources :users, only: [:index, :create, :show, :update]  do
-    # added GETs for all these to customize data we get about a user
     member do
-      get :following, :following_count, :followers, :followers_count, :recentfollowers, :friendrequests, :friends, :myrelationship, :myreverserelationship, :venues, :microposts, :feed, :valid, :search
+      get :valid, :microposts, :events, :rounds, :holes, :reservations
     end
     member do
-      post :searchemail, :invitationemailonly, :refreshnotify, :blockuser
-    end
-  end
-
-  #########################################
-  # user related models
-  #########################################
-  resources :microposts, only: [:create, :destroy] do
-    member do
-      post :taguser
-    end
-  end
-  resources :tokens,:only => [:create, :destroy]
-  resources :relationships, only: [:create, :destroy] do
-    member do
-      post :updatestatus, :confirmfollow
+      post :searchemail, :invitationemailonly
     end
   end
 
   #########################################
-  # the venues
+  # other models
   #########################################
-  resources :venues, only: [:index, :create] do 
+  resources :tokens, only: [:create, :destroy]
+
+
+  resources :events, only: [:index, :create, :show, :update]  do
     member do
-      post :favorite, :unfavorite
-      get :feed
+      get :rounds, :users
+    end
+    member do
+      post :adduser, :createround
     end
   end
+  resources :rounds, only: [:index, :create, :show, :update]  do
+    member do
+      get :holes
+    end
+    member do
+      post :createhole
+    end
+  end
+  resources :holes, only: [:index, :create, :show, :update]
+
+
+  resources :facilities, only: [:index, :create, :show, :update] do
+    member do
+      get :courses
+    end
+  end
+  resources :courses, only: [:index, :create, :show, :update]  do
+    member do
+      get :events, :rounds, :holes, :reservations
+    end
+  end
+  resources :scorecards, only: [:index, :create, :show, :update] 
+  resources :reservations, only: [:index, :create, :show, :update]
+
+  resources :promos, only: [:index, :create, :show, :update]
+
 
   #########################################
   # email forms

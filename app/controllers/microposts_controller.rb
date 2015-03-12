@@ -3,8 +3,7 @@ class MicropostsController < ApplicationController
   before_filter :correct_user,   only: :destroy
 
   #########################################
-  # create a new status
-  # pass user_id, content
+  # create new
   #########################################
   def create
     @user = current_user
@@ -15,29 +14,11 @@ class MicropostsController < ApplicationController
         format.json  { render :json=> { 
           :micropost=>@micropost.as_json(:only => [:id, :content, :created_at], :methods => [:photo_url], 
             :include => { 
-              :user => { :only => [:id, :name], :methods => [:photo_url] },
-              :venue => { :only => [:id, :name] },
-              :users => { :only => [:id, :name], :methods => [:photo_url] } 
+              :course => { :only => [:id, :name] } } 
             }
           )
         } }
       end
-    end
-  end
-
-  #########################################
-  # tags a user
-  #########################################
-  def taguser
-    @user = User.find(params[:user][:id])
-    @micropost = Micropost.find(params[:id])
-    @micropost.users << @user 
-    
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json  { render :json=> { 
-        :micropost=>@micropost.as_json(:only => [:id, :content, :created_at], :methods => [:photo_url])
-      } }
     end
   end
 

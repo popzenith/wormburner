@@ -41,7 +41,7 @@ en:
       update_needs_confirmation: "You updated your account successfully, but we need to verify your new email address. Please check your email and click on the confirm link to finalize confirming your new email address."
       updated: "You updated your account successfully."
     sessions:
-      signed_in: "Welcome! You have signed up successfully. We will send you an email as soon as the GolfPals app becomes available. Stay tuned!"
+      signed_in: "Welcome! You have signed up successfully. We will send you an email as soon as the WormBurner app becomes available. Stay tuned!"
       signed_out: ""
     unlocks:
       send_instructions: "You will receive an email with instructions about how to unlock your account in a few minutes."

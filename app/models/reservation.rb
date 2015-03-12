@@ -1,13 +1,14 @@
-class Favorite < ActiveRecord::Base
-
-	#########################################
-  # Setup accessible (or protected) attributes for your model
-  #########################################
-  attr_accessible :user_id, :venue_id
+class Reservation < ActiveRecord::Base
   
   #########################################
-  # refers to the join
+  # Setup accessible (or protected) attributes for your model
+  #########################################
+  attr_accessible :user_id, :course_id, :complete
+
+  #########################################
+  # custom
   #########################################
   belongs_to :user
-  belongs_to :venue
+  belongs_to :course
+  
 end

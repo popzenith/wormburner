@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Golfpals::Application.load_tasks
+WormBurner::Application.load_tasks

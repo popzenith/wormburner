@@ -41,3 +41,5 @@ gem 'mandrill-api'
 group :production do
   gem 'rails_12factor'
 end
+
+gem 'smarter_csv', '~> 1.0.17' 

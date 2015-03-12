@@ -1,13 +1,13 @@
-class Relationship < ActiveRecord::Base
+class Hole < ActiveRecord::Base
   
   #########################################
   # Setup accessible (or protected) attributes for your model
   #########################################
-  attr_accessible :followed_id, :status
+  attr_accessible :round_id, :hole_number, :score_total, :putts, :penalty, :fairway, :green, :sand, :scramble, :holepar, :holehandicap
 
   #########################################
-  # refers to the join
+  # custom
   #########################################
-  belongs_to :follower, class_name: "User"
-  belongs_to :followed, class_name: "User"
+  belongs_to :round
+  
 end
