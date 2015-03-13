@@ -15,6 +15,7 @@ class EventsController < ApplicationController
           :include => { 
             :users => { :only => [:id, :name, :invitation_token, :notify, :handicap], :methods => [:photo_url] },
             :rounds => { }
+          }
         )
       } }
       end
@@ -33,6 +34,7 @@ class EventsController < ApplicationController
             :include => { 
               :users => { :only => [:id, :name, :invitation_token, :notify, :handicap], :methods => [:photo_url] },
               :rounds => { }
+            }
           )
         } }
       end
@@ -50,6 +52,7 @@ class EventsController < ApplicationController
             :include => { 
               :users => { :only => [:id, :name, :invitation_token, :notify, :handicap], :methods => [:photo_url] },
               :rounds => { }
+            }
           )
         } }
       end
@@ -67,6 +70,7 @@ class EventsController < ApplicationController
             :include => { 
               :users => { :only => [:id, :name, :invitation_token, :notify, :handicap], :methods => [:photo_url] },
               :rounds => { }
+            }
           )
         } }
       end
@@ -85,6 +89,7 @@ class EventsController < ApplicationController
           :include => { 
             :users => { :only => [:id, :name, :invitation_token, :notify, :handicap], :methods => [:photo_url] },
             :rounds => { }
+          }
         )
       } }
     end
