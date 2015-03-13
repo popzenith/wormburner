@@ -12,11 +12,7 @@ class MicropostsController < ApplicationController
       respond_to do |format|
         format.html # index.html.erb
         format.json  { render :json=> { 
-          :micropost=>@micropost.as_json(:only => [:id, :content, :created_at], :methods => [:photo_url], 
-            :include => { 
-              :course => { :only => [:id, :name] } } 
-            }
-          )
+          :micropost=>@micropost.as_json()
         } }
       end
     end
