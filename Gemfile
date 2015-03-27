@@ -43,3 +43,5 @@ group :production do
 end
 
 gem 'smarter_csv', '~> 1.0.17' 
+
+gem 'geokit-rails'

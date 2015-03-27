@@ -11,7 +11,7 @@ class EventsController < ApplicationController
       respond_to do |format|
         format.html # index.html.erb
         format.json  { render :json=> { 
-        :event=>@event.as_json(:only => [:id, :course_id, :complete, :playdate], 
+        :event=>@event.as_json(
           :include => { 
             :users => { :only => [:id, :name, :invitation_token, :notify, :handicap], :methods => [:photo_url] },
             :rounds => { }
@@ -30,7 +30,7 @@ class EventsController < ApplicationController
       respond_to do |format|
         format.html # index.html.erb
         format.json  { render :json=> { 
-          :event=>@event.as_json(:only => [:id, :course_id, :complete, :playdate], 
+          :event=>@event.as_json(
             :include => { 
               :users => { :only => [:id, :name, :invitation_token, :notify, :handicap], :methods => [:photo_url] },
               :rounds => { }
@@ -48,7 +48,7 @@ class EventsController < ApplicationController
       respond_to do |format|
         format.html # index.html.erb
         format.json  { render :json=> { 
-          :event=>@event.as_json(:only => [:id, :course_id, :complete, :playdate], 
+          :event=>@event.as_json(
             :include => { 
               :users => { :only => [:id, :name, :invitation_token, :notify, :handicap], :methods => [:photo_url] },
               :rounds => { }
@@ -66,13 +66,14 @@ class EventsController < ApplicationController
       respond_to do |format|
         format.html # index.html.erb
         format.json  { render :json=> { 
-          :event=>@event.as_json(:only => [:id, :course_id, :complete, :playdate], 
-            :include => { 
-              :users => { :only => [:id, :name, :invitation_token, :notify, :handicap], :methods => [:photo_url] },
-              :rounds => { }
-            }
-          )
-        } }
+		  :round=>@round.as_json(
+			:include => { 
+			  :holes => { },
+			  :scorecard => { },
+			  :event => { }
+			}
+		  )
+		} }
       end
     end
   end
@@ -92,6 +93,18 @@ class EventsController < ApplicationController
           }
         )
       } }
+    end
+  end
+
+  #########################################
+  # destroy
+  #########################################
+  def destroy
+    @event = Event.find(params[:id])
+    @event.destroy
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json  { render :json=> @event.as_json() } 
     end
   end
 

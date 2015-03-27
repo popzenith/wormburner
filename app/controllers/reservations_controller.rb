@@ -9,7 +9,7 @@ class ReservationsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json  { render :json=> { 
-        :reservations=>@reservations.as_json(:only => [:id, :user_id, :course_id])
+        :reservations=>@reservations.as_json()
       } }
     end
   end
@@ -23,7 +23,7 @@ class ReservationsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json  { render :json=> { 
-        :reservation=>@reservation.as_json(:only => [:id, :user_id, :course_id])
+        :reservation=>@reservation.as_json()
       } }
     end
   end

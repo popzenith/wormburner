@@ -18,30 +18,6 @@ class UsersController < ApplicationController
     end
   end
 
-  # search user names
-  def search
-    
-    puts '====================== search'
-
-    # get search term
-    if params[:search].nil?
-      @users = []
-    else 
-      @users = User.search(params[:search]).limit(50).order('lower(name) ASC')
-      if @users.nil?
-        @users = []
-      end
-    end
-
-    # find
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json  { render :json=> { 
-        :users=>@users.as_json(:only => [:id, :name, :invitation_token, :notify, :handicap], :methods => [:photo_url]) 
-      } }
-    end
-  end
-
   # for checking valid token and download user
   def valid
 
@@ -74,6 +50,32 @@ class UsersController < ApplicationController
   end
 
   #########################################
+  # search
+  #########################################
+  def search
+    
+    puts '====================== search'
+
+    # get search term
+    if params[:search].nil?
+      @users = []
+    else 
+      @users = User.search(params[:search]).limit(50).order('lower(name) ASC').where.not(buddy: 'FAKE')
+      if @users.nil?
+        @users = []
+      end
+    end
+
+    # find
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json  { render :json=> { 
+        :users=>@users.as_json(:only => [:id, :name, :invitation_token, :notify, :handicap, :buddy], :methods => [:photo_url]) 
+      } }
+    end
+  end
+
+  #########################################
   # activity
   #########################################
 
@@ -100,15 +102,23 @@ class UsersController < ApplicationController
     puts '====================== events'
 
     @user = User.find(params[:id])
-    @events = @user.events.paginate(page: params[:page], :per_page => 50)
+    @events = @user.events.where(complete: 'Y').paginate(page: params[:page], :per_page => 50)
     respond_to do |format|
       format.html # index.html.erb
       format.json  { render :json=> { 
-        :events=>@events.as_json(:only => [:id, :course_id, :complete, :playdate], 
+        :events=>@events.as_json(
           :include => { 
             :users => { :only => [:id, :name, :invitation_token, :notify, :handicap], :methods => [:photo_url] },
-            :rounds => { },
-            :course => { }  
+            :rounds => { 
+              :include => { 
+                :scorecard => { }
+              }
+            },
+            :course => {
+              :include => {
+                :facility => { :only => [:id, :facility_code, :facility_name, :address, :city, :state, :longitude, :latitude] }
+              } 
+            }  
           }
         )
       } }
@@ -122,15 +132,23 @@ class UsersController < ApplicationController
     puts '====================== events'
 
     @user = User.find(params[:id])
-    @events = @user.events.where(complete: 'inprogress').paginate(page: params[:page], :per_page => 50)
+    @events = @user.events.where(complete: 'INPROGRESS').paginate(page: params[:page], :per_page => 50)
     respond_to do |format|
       format.html # index.html.erb
       format.json  { render :json=> { 
-        :events=>@events.as_json(:only => [:id, :course_id, :complete, :playdate], 
+        :events=>@events.as_json(
           :include => { 
             :users => { :only => [:id, :name, :invitation_token, :notify, :handicap], :methods => [:photo_url] },
-            :rounds => { },
-            :course => { }  
+            :rounds => { 
+              :include => { 
+                :scorecard => { }
+              }
+            },
+            :course => {
+              :include => {
+                :facility => { :only => [:id, :facility_code, :facility_name, :address, :city, :state, :longitude, :latitude] }
+              } 
+            }  
           }
         )
       } }
@@ -144,13 +162,15 @@ class UsersController < ApplicationController
     puts '====================== rounds'
 
     @user = User.find(params[:id])
-    @rounds = @user.rounds.paginate(page: params[:page], :per_page => 50)
+    @rounds = @user.rounds.where(complete: 'Y').paginate(page: params[:page], :per_page => 50)
     respond_to do |format|
       format.html # index.html.erb
       format.json  { render :json=> { 
-        :rounds=>@rounds.as_json(:only => [:id, :created_at, :user_id, :event_id, :tee, :score_front, :score_back, :score_total, :handicap_used], 
+        :rounds=>@rounds.as_json(
           :include => { 
-            :holes => { }
+            :holes => { },
+            :scorecard => { },
+            :event => { }
           }
         )
       } }

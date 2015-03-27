@@ -9,7 +9,7 @@ class RoundsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json  { render :json=> { 
-        :rounds=>@rounds.as_json(:only => [:id, :event_id, :user_id, :scorecard_id, :tee, :score_front, :score_back, :score_total, :handicap_used, :complete, :created_at])
+        :rounds=>@rounds.as_json()
       } }
     end
   end
@@ -24,7 +24,7 @@ class RoundsController < ApplicationController
       respond_to do |format|
         format.html # index.html.erb
         format.json  { render :json=> { 
-        :round=>@round.as_json(:only => [:id, :event_id, :user_id, :scorecard_id, :tee, :score_front, :score_back, :score_total, :handicap_used, :complete, :created_at], 
+        :round=>@round.as_json( 
           :include => { 
             :holes => { }  
           }
@@ -33,7 +33,21 @@ class RoundsController < ApplicationController
       end
     end
   end
-
+  
+  #########################################
+  # update
+  #########################################
+  def update
+    @round = Round.find(params[:id])
+    if @round.update_attributes(params[:round])
+      respond_to do |format|
+        format.html # index.html.erb
+        format.json  { render :json=> { 
+          :round=>@round.as_json()
+        } }
+      end
+    end
+  end
 
   #########################################
   # show
@@ -43,7 +57,7 @@ class RoundsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json  { render :json=> { 
-        :round=>@round.as_json(:only => [:id, :event_id, :user_id, :scorecard_id, :tee, :score_front, :score_back, :score_total, :handicap_used, :complete, :created_at], 
+        :round=>@round.as_json(
           :include => { 
             :holes => {  }  
           }

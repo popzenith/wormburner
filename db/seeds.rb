@@ -25,24 +25,5 @@ Scorecard.create!(:course_id => cid.id, :tee_id => row['tee_id'], :course_code =
 end
 end
 
-
-
-user = User.create! :name => 'jl', :email => 'test1@wb.co', :password => 'foobar', :password_confirmation => 'foobar'
+user = User.create! :name => 'jlnovosad', :email => 'test1@wb.co', :password => 'foobar', :password_confirmation => 'foobar', :handicap => 6.4, :buddy => 'REAL'
 user.add_role :admin
-user2 = User.create! :name => 'Russell', :email => 'test2@wb.co', :password => 'foobar', :password_confirmation => 'foobar'
-
-event1 = user.events.create! :course_id => 1
-event1.users << user2
-event2 = user.events.create! :course_id => 2
-
-round1 = event1.rounds.create! :score_front => '37', :score_back => '37', :score_total => '74', :handicap_used => 'YES', :user_id => user.id, :tee => 'BLUE'
-h = round1.holes.create! :hole_number => '1', :score_total => '3', :putts => '1', :penalty => '0', :fairway => 'Y', :green => 'Y', :sand => 'Y', :scramble => 'Y'
-h = round1.holes.create! :hole_number => '2', :score_total => '4', :putts => '2', :penalty => '1', :fairway => 'L', :green => 'Y', :sand => 'N', :scramble => 'N'
-h = round1.holes.create! :hole_number => '3', :score_total => '6', :putts => '1', :penalty => '0', :fairway => 'R', :green => 'Y', :sand => 'Y', :scramble => 'Y'
-h = round1.holes.create! :hole_number => '4', :score_total => '6', :putts => '2', :penalty => '1', :fairway => 'S', :green => 'N', :sand => 'N', :scramble => 'N'
-
-round2 = event1.rounds.create! :score_front => '37', :score_back => '39', :score_total => '76', :handicap_used => 'YES', :user_id => user2.id, :tee => 'BLUE'
-round3 = event2.rounds.create! :score_front => '37', :score_back => '47', :score_total => '84', :handicap_used => 'YES', :user_id => user.id, :tee => 'WHITE'
-
-promo1 = Promo.create! :content => 'Coolstuf', :link => 'http://www.google.com'
-promo2 = Promo.create! :content => 'Another', :link => 'http://www.yahoo.com'

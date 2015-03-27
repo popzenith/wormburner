@@ -3,8 +3,9 @@ class CreateHoles < ActiveRecord::Migration
     create_table :holes do |t|
       t.integer :round_id
 
-      t.string :hole_number
+      t.integer :hole_number
       t.integer :score_total
+      t.integer :score_total_esc
       t.integer :strikes
       t.integer :putts
       t.integer :penalty
@@ -12,8 +13,8 @@ class CreateHoles < ActiveRecord::Migration
       t.string :green
       t.string :sand
       t.string :scramble
-      t.string :holepar
-      t.string :holehandicap
+      t.integer :holepar
+      t.integer :holehandicap
       
       t.timestamps
     end

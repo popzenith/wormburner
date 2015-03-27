@@ -18,10 +18,7 @@ WormBurner::Application.routes.draw do
   #########################################
   resources :users, only: [:index, :create, :show, :update]  do
     member do
-      get :valid, :microposts, :events, :rounds, :holes, :reservations
-    end
-    member do
-      post :searchemail, :invitationemailonly
+      get :search, :valid, :refreshnotify, :events, :eventsinprogress, :rounds
     end
   end
 
@@ -30,8 +27,7 @@ WormBurner::Application.routes.draw do
   #########################################
   resources :tokens, only: [:create, :destroy]
 
-
-  resources :events, only: [:index, :create, :show, :update]  do
+  resources :events, only: [:index, :create, :show, :update, :destroy]  do
     member do
       get :rounds, :users
     end
@@ -49,17 +45,12 @@ WormBurner::Application.routes.draw do
   end
   resources :holes, only: [:index, :create, :show, :update]
 
-
-  resources :facilities, only: [:index, :create, :show, :update] do
-    member do
-      get :courses
+  resources :facilities, only: [:index, :create, :show, :update]  do 
+    collection do
+      get :search
     end
   end
-  resources :courses, only: [:index, :create, :show, :update]  do
-    member do
-      get :events, :rounds, :holes, :reservations
-    end
-  end
+  resources :courses, only: [:index, :create, :show, :update]
   resources :scorecards, only: [:index, :create, :show, :update] 
   resources :reservations, only: [:index, :create, :show, :update]
 

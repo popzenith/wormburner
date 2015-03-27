@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   #########################################
   # Setup accessible (or protected) attributes for your model
   #########################################
-  attr_accessible :name, :email, :current_password, :password, :password_confirmation, :remember_me, :photo, :invitation_token, :invited_by_id, :invited_by_type, :notify, :handicap, :buddy
+  attr_accessible :name, :email, :current_password, :password, :password_confirmation, :remember_me, :photo, :invitation_token, :invited_by_id, :invited_by_type, :notify, :handicap, :buddy, :gender
   attr_accessor :current_password
 
   #########################################

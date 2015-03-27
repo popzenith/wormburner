@@ -9,7 +9,7 @@ class PromosController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json  { render :json=> { 
-        :promos=>@promos.as_json(:only => [:id, :user_id, :course_id, :content, :link]) 
+        :promos=>@promos.as_json() 
       } }
     end
   end
@@ -22,7 +22,7 @@ class PromosController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json  { render :json=> { 
-        :promo=>@promo.as_json(:only => [:id, :user_id, :course_id, :content, :link]) 
+        :promo=>@promo.as_json() 
       } }
     end
   end

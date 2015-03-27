@@ -5,8 +5,8 @@ class CreateCourses < ActiveRecord::Migration
       t.string :course_code	
 	  	t.string :facility_code	
 	  	t.string :course_name	
-	  	t.string :hol
-	  	t.string :par	
+	  	t.integer :hol
+	  	t.integer :par	
 	  	t.string :course_type	
 	  	t.string :course_architect	
 	  	t.string :open_date	
