@@ -27,7 +27,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json  { render :json=> { 
-        :user=>@user.as_json(:only => [:id, :name, :email, :invitation_token, :notify, :handicap], :methods => [:photo_url]) 
+        :user=>@user.as_json(:only => [:id, :name, :email, :invitation_token, :notify, :buddy, :gender, :displayname], :methods => [:photo_url]) 
       } }
     end
   end
@@ -44,7 +44,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json  { render :json=> { 
-        :user=>@user.as_json(:only => [:id, :name, :email, :invitation_token, :notify, :handicap], :methods => [:photo_url])  
+        :user=>@user.as_json(:only => [:id, :name, :email, :invitation_token, :notify, :buddy, :gender, :displayname], :methods => [:photo_url])  
       } }
     end
   end
@@ -70,7 +70,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json  { render :json=> { 
-        :users=>@users.as_json(:only => [:id, :name, :invitation_token, :notify, :handicap, :buddy], :methods => [:photo_url]) 
+        :users=>@users.as_json(:only => [:id, :name, :invitation_token, :notify, :notify, :buddy, :gender, :displayname], :methods => [:photo_url]) 
       } }
     end
   end
@@ -90,7 +90,11 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json  { render :json=> { 
-        :user=>@user.as_json(:only => [:id, :name, :invitation_token, :notify, :handicap], :methods => [:photo_url]) 
+        :user=>@user.as_json(:only => [:id, :name, :invitation_token, :notify, :buddy, :gender, :displayname], :methods => [:photo_url],
+          :include => { 
+            :rounds => { }
+          }
+        ) 
       } }
     end
   end
@@ -108,7 +112,7 @@ class UsersController < ApplicationController
       format.json  { render :json=> { 
         :events=>@events.as_json(
           :include => { 
-            :users => { :only => [:id, :name, :invitation_token, :notify, :handicap], :methods => [:photo_url] },
+            :users => { :only => [:id, :name, :invitation_token, :notify, :buddy, :gender, :displayname], :methods => [:photo_url] },
             :rounds => { 
               :include => { 
                 :scorecard => { }
@@ -138,7 +142,37 @@ class UsersController < ApplicationController
       format.json  { render :json=> { 
         :events=>@events.as_json(
           :include => { 
-            :users => { :only => [:id, :name, :invitation_token, :notify, :handicap], :methods => [:photo_url] },
+            :users => { :only => [:id, :name, :invitation_token, :notify, :buddy, :gender, :displayname], :methods => [:photo_url] },
+            :rounds => { 
+              :include => { 
+                :scorecard => { }
+              }
+            },
+            :course => {
+              :include => {
+                :facility => { :only => [:id, :facility_code, :facility_name, :address, :city, :state, :longitude, :latitude] }
+              } 
+            }  
+          }
+        )
+      } }
+    end
+  end
+  
+  # approve a score someone entered for you
+  def eventsapproval
+    @title = "My Events For Approval"
+
+    puts '====================== events'
+
+    @user = User.find(params[:id])
+    @events = @user.events.where(complete: 'APPROVE').paginate(page: params[:page], :per_page => 50)
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json  { render :json=> { 
+        :events=>@events.as_json(
+          :include => { 
+            :users => { :only => [:id, :name, :invitation_token, :notify, :buddy, :gender, :displayname], :methods => [:photo_url] },
             :rounds => { 
               :include => { 
                 :scorecard => { }

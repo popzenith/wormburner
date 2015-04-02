@@ -13,7 +13,7 @@ class EventsController < ApplicationController
         format.json  { render :json=> { 
         :event=>@event.as_json(
           :include => { 
-            :users => { :only => [:id, :name, :invitation_token, :notify, :handicap], :methods => [:photo_url] },
+            :users => { :only => [:id, :name, :invitation_token, :notify, :buddy, :gender, :displayname], :methods => [:photo_url] },
             :rounds => { }
           }
         )
@@ -32,7 +32,7 @@ class EventsController < ApplicationController
         format.json  { render :json=> { 
           :event=>@event.as_json(
             :include => { 
-              :users => { :only => [:id, :name, :invitation_token, :notify, :handicap], :methods => [:photo_url] },
+              :users => { :only => [:id, :name, :invitation_token, :notify, :buddy, :gender, :displayname], :methods => [:photo_url] },
               :rounds => { }
             }
           )
@@ -50,7 +50,7 @@ class EventsController < ApplicationController
         format.json  { render :json=> { 
           :event=>@event.as_json(
             :include => { 
-              :users => { :only => [:id, :name, :invitation_token, :notify, :handicap], :methods => [:photo_url] },
+              :users => { :only => [:id, :name, :invitation_token, :notify, :buddy, :gender, :displayname], :methods => [:photo_url] },
               :rounds => { }
             }
           )
@@ -74,6 +74,26 @@ class EventsController < ApplicationController
 			}
 		  )
 		} }
+      end
+    end
+  end
+
+  #########################################
+  # update
+  #########################################
+  def update
+    @event = Event.find(params[:id])
+    if @event.update_attributes(params[:event])
+      respond_to do |format|
+        format.html # index.html.erb
+        format.json  { render :json=> { 
+          :event=>@event.as_json(:only => [:id, :course_id, :complete, :playdate], 
+            :include => { 
+              :users => { :only => [:id, :name, :invitation_token, :notify, :handicap], :methods => [:photo_url] },
+              :rounds => { }
+            }
+          )
+        } }
       end
     end
   end

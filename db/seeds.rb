@@ -25,5 +25,6 @@ Scorecard.create!(:course_id => cid.id, :tee_id => row['tee_id'], :course_code =
 end
 end
 
-user = User.create! :name => 'jlnovosad', :email => 'test1@wb.co', :password => 'foobar', :password_confirmation => 'foobar', :handicap => 6.4, :buddy => 'REAL'
+user = User.create! :name => 'jlnovosad', :email => 'test1@wb.co', :password => 'foobar', :password_confirmation => 'foobar', :gender => 'M', :buddy => 'REAL'
 user.add_role :admin
+user = User.create! :name => 'art', :email => 'art@wb.co', :password => 'foobar', :password_confirmation => 'foobar', :gender => 'F', :buddy => 'REAL'

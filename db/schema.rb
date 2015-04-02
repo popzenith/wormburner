@@ -288,6 +288,7 @@ ActiveRecord::Schema.define(version: 81) do
     t.float    "handicap"
     t.string   "buddy"
     t.string   "gender"
+    t.string   "displayname"
   end
 
   add_index "users", ["authentication_token"], name: "index_users_on_authentication_token", unique: true, using: :btree
