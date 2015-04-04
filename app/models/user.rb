@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   #########################################
   # Setup accessible (or protected) attributes for your model
   #########################################
-  attr_accessible :name, :email, :current_password, :password, :password_confirmation, :remember_me, :photo, :invitation_token, :invited_by_id, :invited_by_type, :notify, :buddy, :gender, :displayname
+  attr_accessible :name, :email, :current_password, :password, :password_confirmation, :remember_me, :photo, :pdf, :invitation_token, :invited_by_id, :invited_by_type, :notify, :buddy, :gender, :displayname
   attr_accessor :current_password
 
   #########################################
@@ -31,6 +31,8 @@ class User < ActiveRecord::Base
   has_attached_file :photo, :styles => { :small => "300x300#" },
                             :default_url => 'missing_:style.png'
 
+  has_attached_file :pdf
+
   #########################################
   # these methods can be called from the controller to get data from other models 
   # look in the controller and see these get called 
@@ -39,6 +41,11 @@ class User < ActiveRecord::Base
   # profile photos
   def photo_url
     photo.url(:small)
+  end
+
+  # stats pdf
+  def pdf_url
+    pdf.url()
   end
 
   # search

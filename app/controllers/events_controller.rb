@@ -11,13 +11,26 @@ class EventsController < ApplicationController
       respond_to do |format|
         format.html # index.html.erb
         format.json  { render :json=> { 
-        :event=>@event.as_json(
-          :include => { 
-            :users => { :only => [:id, :name, :invitation_token, :notify, :buddy, :gender, :displayname], :methods => [:photo_url] },
-            :rounds => { }
-          }
-        )
-      } }
+          :event=>@event.as_json(
+            :include => { 
+              :users => { :only => [:id, :name, :invitation_token, :notify, :buddy, :gender, :displayname], :methods => [:photo_url] },
+              :rounds => { 
+                :include => { 
+                  :scorecard => { }
+                }
+              },
+              :course => {
+                :include => {
+                  :facility => { :only => [:id, :facility_code, :facility_name, :address, :city, :state, :longitude, :latitude], 
+                    :include => { 
+                      :courses => { :only => [:id, :course_code, :facility_code, :course_name, :hol, :par] }
+                    }
+                  }
+                } 
+              }  
+            }
+          )
+        } }
       end
     end
   end
@@ -66,14 +79,14 @@ class EventsController < ApplicationController
       respond_to do |format|
         format.html # index.html.erb
         format.json  { render :json=> { 
-		  :round=>@round.as_json(
-			:include => { 
-			  :holes => { },
-			  :scorecard => { },
-			  :event => { }
-			}
-		  )
-		} }
+    		  :round=>@round.as_json(
+      			:include => { 
+      			  :holes => { },
+      			  :scorecard => { },
+      			  :event => { }
+      			}
+      		)
+      	} }
       end
     end
   end
@@ -87,10 +100,23 @@ class EventsController < ApplicationController
       respond_to do |format|
         format.html # index.html.erb
         format.json  { render :json=> { 
-          :event=>@event.as_json(:only => [:id, :course_id, :complete, :playdate], 
+          :event=>@event.as_json(
             :include => { 
-              :users => { :only => [:id, :name, :invitation_token, :notify, :handicap], :methods => [:photo_url] },
-              :rounds => { }
+              :users => { :only => [:id, :name, :invitation_token, :notify, :buddy, :gender, :displayname], :methods => [:photo_url] },
+              :rounds => { 
+                :include => { 
+                  :scorecard => { }
+                }
+              },
+              :course => {
+                :include => {
+                  :facility => { :only => [:id, :facility_code, :facility_name, :address, :city, :state, :longitude, :latitude], 
+                    :include => { 
+                      :courses => { :only => [:id, :course_code, :facility_code, :course_name, :hol, :par] }
+                    }
+                  }
+                } 
+              }  
             }
           )
         } }
@@ -106,10 +132,24 @@ class EventsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json  { render :json=> { 
-        :event=>@event.as_json(:only => [:id, :course_id, :complete, :playdate], 
+        :event=>@event.as_json(
           :include => { 
-            :users => { :only => [:id, :name, :invitation_token, :notify, :handicap], :methods => [:photo_url] },
-            :rounds => { }
+            :users => { :only => [:id, :name, :invitation_token, :notify, :buddy, :gender, :displayname], :methods => [:photo_url] },
+            :rounds => { 
+              :include => { 
+                :holes => { },
+                :scorecard => { }
+              }
+            },
+            :course => {
+              :include => {
+                :facility => { :only => [:id, :facility_code, :facility_name, :address, :city, :state, :longitude, :latitude], 
+                  :include => { 
+                    :courses => { :only => [:id, :course_code, :facility_code, :course_name, :hol, :par] }
+                  }
+                }
+              } 
+            }  
           }
         )
       } }

@@ -18,7 +18,10 @@ WormBurner::Application.routes.draw do
   #########################################
   resources :users, only: [:index, :create, :show, :update]  do
     member do
-      get :search, :valid, :refreshnotify, :events, :eventsinprogress, :eventsapproval, :rounds
+      get :search, :valid, :refreshnotify, :events, :eventsinprogress, :rounds
+    end
+    member do
+      post :posteremail
     end
   end
 

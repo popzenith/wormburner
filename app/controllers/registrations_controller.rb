@@ -1,7 +1,5 @@
 class RegistrationsController < Devise::RegistrationsController
   
-  respond_to :html, :json
-  
   before_filter :authenticate_user!
 
   # need this to add custom 'name' field to devise in Rails 4
@@ -34,7 +32,7 @@ class RegistrationsController < Devise::RegistrationsController
           redirect_to after_update_path_for(@user)
         }
         format.json  { render :json=> { 
-          :user=>@user.as_json(:only => [:id, :name, :email, :invitation_token, :notify, :buddy, :gender, :displayname], :methods => [:photo_url]) 
+          :user=>@user.as_json(:only => [:id, :name, :email, :invitation_token, :notify, :buddy, :gender, :displayname], :methods => [:photo_url, :pdf_url]) 
         } }
       end
     else

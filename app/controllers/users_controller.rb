@@ -120,7 +120,11 @@ class UsersController < ApplicationController
             },
             :course => {
               :include => {
-                :facility => { :only => [:id, :facility_code, :facility_name, :address, :city, :state, :longitude, :latitude] }
+                :facility => { :only => [:id, :facility_code, :facility_name, :address, :city, :state, :longitude, :latitude], 
+                  :include => { 
+                    :courses => { :only => [:id, :course_code, :facility_code, :course_name, :hol, :par] }
+                  }
+                }
               } 
             }  
           }
@@ -150,37 +154,11 @@ class UsersController < ApplicationController
             },
             :course => {
               :include => {
-                :facility => { :only => [:id, :facility_code, :facility_name, :address, :city, :state, :longitude, :latitude] }
-              } 
-            }  
-          }
-        )
-      } }
-    end
-  end
-  
-  # approve a score someone entered for you
-  def eventsapproval
-    @title = "My Events For Approval"
-
-    puts '====================== events'
-
-    @user = User.find(params[:id])
-    @events = @user.events.where(complete: 'APPROVE').paginate(page: params[:page], :per_page => 50)
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json  { render :json=> { 
-        :events=>@events.as_json(
-          :include => { 
-            :users => { :only => [:id, :name, :invitation_token, :notify, :buddy, :gender, :displayname], :methods => [:photo_url] },
-            :rounds => { 
-              :include => { 
-                :scorecard => { }
-              }
-            },
-            :course => {
-              :include => {
-                :facility => { :only => [:id, :facility_code, :facility_name, :address, :city, :state, :longitude, :latitude] }
+                :facility => { :only => [:id, :facility_code, :facility_name, :address, :city, :state, :longitude, :latitude], 
+                  :include => { 
+                    :courses => { :only => [:id, :course_code, :facility_code, :course_name, :hol, :par] }
+                  }
+                }
               } 
             }  
           }
@@ -196,6 +174,7 @@ class UsersController < ApplicationController
     puts '====================== rounds'
 
     @user = User.find(params[:id])
+    #@rounds = @user.rounds.where(complete: 'Y').paginate(page: params[:page], :per_page => 50)
     @rounds = @user.rounds.where(complete: 'Y').paginate(page: params[:page], :per_page => 50)
     respond_to do |format|
       format.html # index.html.erb
@@ -210,5 +189,41 @@ class UsersController < ApplicationController
       } }
     end
   end
-  
+
+  # email visualization pdf
+  def posteremail
+
+    puts '====================== posteremail'
+
+    # get user
+    @user = User.find(params[:id])
+    @email = @user[:email]
+
+    # message object
+    @message = {}
+    @message = params[:message]
+    @pdfurl = params[:message][:pdf_url]
+    @message[:email] = @email
+    @message[:subject] = "Your WormBurner Stats Visualization"
+    @message[:body] = "
+    <p>Hello #{@email}!</p>
+    <br/>
+    <p>Download your WormBurner stats visualization here #{@pdfurl}</p>
+    <br/>
+    <p>Keep playing and get some more birdies on there!</p>"
+
+    # send email
+    @sendmessage = Message.new(@message)
+    if @sendmessage.valid?
+      PosterMailer.new_message(@sendmessage).deliver
+    end 
+    
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json  { render :json=> { 
+        :user=>@user.as_json( :only => [:id, :name, :invitation_token, :notify, :buddy, :gender, :displayname], :methods => [:photo_url, :pdf_url] )
+        } }
+    end
+  end
+
 end
