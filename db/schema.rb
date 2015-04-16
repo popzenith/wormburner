@@ -289,7 +289,6 @@ ActiveRecord::Schema.define(version: 81) do
     t.integer  "pdf_file_size"
     t.datetime "pdf_updated_at"
     t.string   "notify"
-    t.float    "handicap"
     t.string   "buddy"
     t.string   "gender"
     t.string   "displayname"

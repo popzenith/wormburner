@@ -21,7 +21,8 @@ class Facility < ActiveRecord::Base
 
   # search
   def self.search(search)
-    order('facility_name ASC').where('lower(facility_name) LIKE ?', "%#{search.downcase}%").limit(50)
+    where('lower(facility_name) LIKE ?', "%#{search.downcase}%").limit(50)
+    #where('lower(facility_name) LIKE ?', "%#{search.downcase}%").by_distance(:origin => 30,-75).limit(50)
   end
 
 end

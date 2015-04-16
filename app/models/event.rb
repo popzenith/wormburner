@@ -9,7 +9,7 @@ class Event < ActiveRecord::Base
   # custom
   #########################################
   belongs_to :course
-  has_many :rounds
+  has_many :rounds, dependent: :destroy
   has_many :user_events
   has_many :users, through: :user_events
   default_scope order: 'events.created_at DESC'

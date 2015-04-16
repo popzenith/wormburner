@@ -6,7 +6,7 @@ class FacilitiesController < ApplicationController
   #########################################
   def index
     #@facilities = Facility.paginate(page: params[:page], :per_page => 50).order('lower(facility_name) ASC')
-    @facilities = Facility.by_distance(:origin => [params[:latitude],params[:longitude]]).limit(20)
+    @facilities = Facility.by_distance(:origin => [params[:latitude],params[:longitude]]).limit(50)
     respond_to do |format|
       format.html # index.html.erb
       format.json  { render :json=> { 
@@ -34,7 +34,8 @@ class FacilitiesController < ApplicationController
     if params[:search].nil?
       @facilities = []
     else 
-      @facilities = Facility.search(params[:search]).limit(50).order('lower(facility_name) ASC')
+      @facilities = Facility.limit(50).search(params[:search])
+      #@facilities = Facility.where('lower(facility_name) LIKE ?', params[:search]).limit(50)
       if @facilities.nil?
         @facilities = []
       end
