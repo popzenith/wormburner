@@ -2,7 +2,7 @@ puts 'SETTING UP'
 
 require 'csv'  
 
-csv = CSV.read('db/d_scorecards2.csv', :headers => true, :encoding => 'iso-8859-1:utf-8')
+csv = CSV.read('db/d_scorecards3.csv', :headers => true, :encoding => 'iso-8859-1:utf-8')
 csv.each do |row|
 cid = Course.find_by_course_code(row['course_code'])
 if cid.nil?
