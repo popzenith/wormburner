@@ -11,7 +11,7 @@ class Round < ActiveRecord::Base
   belongs_to :scorecard
   belongs_to :user
   belongs_to :event
-  has_many :holes
+  has_many :holes, dependent: :destroy
   default_scope order: 'rounds.created_at DESC'
   
 end
