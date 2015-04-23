@@ -1,4 +1,4 @@
 WormBurner
 ========================
 
-WormBurner is a new social network for golfers. You’ll be able to plan outings with your friends, make tee times, and post your scores and photos.
+WormBurner is the new ultimate scoring and stats app for golfers. Analyze your game with detailed stats and get discounts on tee times. You can also create a free downloadable poster with a data visualization of your game!

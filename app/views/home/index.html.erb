@@ -25,29 +25,9 @@
   <%-# Home page -%>
   <div class="span10 offset1">
     <%= render 'layouts/messages' %>
-    <div class="homeblurb">WormBurner is a new social network for golfers. You’ll be able to plan outings with your friends, make tee times, and post your scores and photos.</div>
-    <br />
-    <div class="homeblurb">Coming soon to the App Store! Sign up today and we will inform you when it's ready.</div>  
-    <br />
-
-    <!-- Begin MailChimp Signup Form -->
-    <div id="mc_embed_signup">
-    <form action="http://popzenith.us7.list-manage.com/subscribe/post?u=21b541367bb372b91b3122fb1&amp;id=f0804262d1" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank" class="new_user" novalidate>
-      <div>
-        <input type="email" value="" name="EMAIL" class="smallinput" id="mce-EMAIL" placeholder="Enter your email">
-      </div>
-      <br />
-      <div id="mce-responses" class="clear">
-        <div class="response" id="mce-error-response" style="display:none"></div>
-        <div class="response" id="mce-success-response" style="display:none"></div>
-      </div>  
-      <div class="clear"><input type="submit" value="Sign up" name="subscribe" id="mc-embedded-subscribe" class="btn btn-large btn-primary"></div>
-    </form>
-    </div>
-
-    <!--End mc_embed_signup-->
-
+    <div id="homeblurb">WormBurner is the new ultimate scoring and stats app for golfers. Analyze your game with detailed stats and get discounts on tee times. You can also create a free downloadable poster with a data visualization of your game!</div>
+    <div class="maincta"><%= link_to "Download for iPhone", "#", class: "btn btn-large btn-primary" %></div> 
     <div class="phoneart"></div>
-
+    
   </div> 
 <% end %>

@@ -1,12 +1,1 @@
 puts 'SETTING UP'
-
-require 'csv'  
-
-csv = CSV.read('db/d_scorecards3.csv', :headers => true, :encoding => 'iso-8859-1:utf-8')
-csv.each do |row|
-cid = Course.find_by_course_code(row['course_code'])
-if cid.nil?
-else
-Scorecard.create!(:course_id => cid.id, :tee_id => row['tee_id'], :course_code => row['course_code'], :tee_name => row['tee_name'], :tee_color => row['tee_color'], :course_par_for_tee => row['course_par_for_tee'], :hole1 => row['hole1'], :hole2 => row['hole2'], :hole3 => row['hole3'], :hole4 => row['hole4'], :hole5 => row['hole5'], :hole6 => row['hole6'], :hole7 => row['hole7'], :hole8 => row['hole8'], :hole9 => row['hole9'], :hole10 => row['hole10'], :hole11 => row['hole11'], :hole12 => row['hole12'], :hole13 => row['hole13'], :hole14 => row['hole14'], :hole15 => row['hole15'], :hole16 => row['hole16'], :hole17 => row['hole17'], :hole18 => row['hole18'], :total_distance => row['total_distance'], :hole1_par => row['hole1_par'], :hole2_par => row['hole2_par'], :hole3_par => row['hole3_par'], :hole4_par => row['hole4_par'], :hole5_par => row['hole5_par'], :hole6_par => row['hole6_par'], :hole7_par => row['hole7_par'], :hole8_par => row['hole8_par'], :hole9_par => row['hole9_par'], :hole10_par => row['hole10_par'], :hole11_par => row['hole11_par'], :hole12_par => row['hole12_par'], :hole13_par => row['hole13_par'], :hole14_par => row['hole14_par'], :hole15_par => row['hole15_par'], :hole16_par => row['hole16_par'], :hole17_par => row['hole17_par'], :hole18_par => row['hole18_par'], :hole1_handicap => row['hole1_handicap'], :hole2_handicap => row['hole2_handicap'], :hole3_handicap => row['hole3_handicap'], :hole4_handicap => row['hole4_handicap'], :hole5_handicap => row['hole5_handicap'], :hole6_handicap => row['hole6_handicap'], :hole7_handicap => row['hole7_handicap'], :hole8_handicap => row['hole8_handicap'], :hole9_handicap => row['hole9_handicap'], :hole10_handicap => row['hole10_handicap'], :hole11_handicap => row['hole11_handicap'], :hole12_handicap => row['hole12_handicap'], :hole13_handicap => row['hole13_handicap'], :hole14_handicap => row['hole14_handicap'], :hole15_handicap => row['hole15_handicap'], :hole16_handicap => row['hole16_handicap'], :hole17_handicap => row['hole17_handicap'], :hole18_handicap => row['hole18_handicap'], :rating => row['rating'], :slope => row['slope'])
-end
-end
