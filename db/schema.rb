@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 81) do
+ActiveRecord::Schema.define(version: 20150520210223) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,9 +95,8 @@ ActiveRecord::Schema.define(version: 81) do
     t.integer  "hole_number"
     t.integer  "score_total"
     t.integer  "score_total_esc"
-    t.integer  "strikes"
     t.integer  "putts"
-    t.integer  "penalty"
+    t.string   "penalty"
     t.string   "fairway"
     t.string   "green"
     t.string   "sand"

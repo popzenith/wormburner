@@ -183,7 +183,19 @@ class UsersController < ApplicationController
           :include => { 
             :holes => { },
             :scorecard => { },
-            :event => { }
+            :event => { 
+              :include => { 
+                :course => {
+                  :include => {
+                    :facility => { :only => [:id, :facility_code, :facility_name, :address, :city, :state, :longitude, :latitude], 
+                      :include => { 
+                        :courses => { :only => [:id, :course_code, :facility_code, :course_name, :hol, :par] }
+                      }
+                    }
+                  } 
+                }  
+              }
+            }
           }
         )
       } }
