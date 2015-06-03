@@ -219,11 +219,8 @@ class UsersController < ApplicationController
     @message[:subject] = "Your WormBurner Stats Visualization"
     @message[:body] = "
     <p>Hello #{@email}!</p>
-    <br/>
-    <p>Download your WormBurner stats visualization here:</p>
-    <br/>
-    <p>#{@pdfurl}</p>
-    <br/>
+    <p>Download your WormBurner stats visualization here:<br/>
+    #{@pdfurl}</p>
     <p>Keep playing and get some more birdies on there!</p>"
 
     # send email
