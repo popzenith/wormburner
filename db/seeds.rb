@@ -100,7 +100,7 @@ while r < 60
 		elsif (46..64) === rnd
 			scramble = "BN"
 		elsif rnd >= 65
-			scramble = "N"
+			scramble = ""
 		end
 
 		# create

@@ -217,11 +217,12 @@ class UsersController < ApplicationController
     @pdfurl = params[:message][:pdf_url]
     @message[:email] = @email
     @message[:subject] = "Your WormBurner Stats Visualization"
-    @message[:body] = "
+    @message[:body] = '
     <p>Hello #{@email}!</p>
     <p>Download your WormBurner stats visualization here:<br/>
     #{@pdfurl}</p>
-    <p>Keep playing and get some more birdies on there!</p>"
+    <p>This poster is 24" x 36", but it will also look good at smaller sizes.</p>
+    <p>Keep playing and get some more birdies on there!</p>'
 
     # send email
     @sendmessage = Message.new(@message)
