@@ -175,7 +175,8 @@ class UsersController < ApplicationController
 
     @user = User.find(params[:id])
     #@rounds = @user.rounds.where(complete: 'Y').paginate(page: params[:page], :per_page => 50)
-    @rounds = @user.rounds.paginate(page: params[:page], :per_page => 50)
+    #@rounds = @user.rounds.paginate(page: params[:page], :per_page => 50)
+    @rounds = @user.rounds
     respond_to do |format|
       format.html # index.html.erb
       format.json  { render :json=> { 
