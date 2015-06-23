@@ -12,7 +12,7 @@ while r < 60
 	@course = Course.find(randcourse) 
 	@event = @user.events.create!(:course_id => @course.id, :owner_id => @user.id, :complete => "Y", :playdate => @date)
 
-	randcard = rand(6..12)
+	randcard = rand(2058..2077)
 	@scorecard = Scorecard.find(randcard) 
 	@round = Round.create!(:event_id => @event.id, :user_id => @user.id, :scorecard_id => @scorecard.id, :tee => @scorecard.tee_color, :hol => 18, :score_front => 0, :score_back => 0, :score_total => 0, :course_handicap => 5, :score_total_adj => 0, :handicap_differential => 0, :complete => "Y", :score_type => "BYHOLE", :playdate => @date)
 
