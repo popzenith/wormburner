@@ -12,7 +12,7 @@ class Round < ActiveRecord::Base
   belongs_to :user
   belongs_to :event
   has_many :holes, dependent: :destroy
-  default_scope order: 'rounds.created_at DESC'
+  default_scope order: 'rounds.playdate DESC'
   
 end
 

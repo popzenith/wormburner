@@ -12,7 +12,7 @@ class Event < ActiveRecord::Base
   has_many :rounds, dependent: :destroy
   has_many :user_events
   has_many :users, through: :user_events
-  default_scope order: 'events.created_at DESC'
+  default_scope order: 'events.playdate DESC'
   
 end
 
