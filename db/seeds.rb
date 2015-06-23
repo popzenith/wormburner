@@ -103,8 +103,18 @@ while r < 60
 			scramble = ""
 		end
 
+		# sand
+		rnd = rand(0..100)
+		if (0..10) === rnd
+			sand = "Y"
+		elsif (11..24) === rnd
+			sand = "N"
+		elsif rnd >= 25
+			sand = ""
+		end
+
 		# create
-		Hole.create!(:round_id => @round.id, :hole_number => h, :score_total => holescore, :score_total_esc => holescore, :putts => putts, :penalty => 'W', :fairway => fairway, :green => green, :sand => "", :scramble => scramble, :holepar => holepararray[h], :holehandicap => @scorecard.hole1_handicap)
+		Hole.create!(:round_id => @round.id, :hole_number => h, :score_total => holescore, :score_total_esc => holescore, :putts => putts, :penalty => '', :fairway => fairway, :green => green, :sand => sand, :scramble => scramble, :holepar => holepararray[h], :holehandicap => @scorecard.hole1_handicap)
 	end
 
 	# update round with real score
