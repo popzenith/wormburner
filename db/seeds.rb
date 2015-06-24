@@ -5,7 +5,7 @@ puts 'SETTING UP'
 
 # for 1 to 50 rounds
 r = 0
-while r < 10
+while r < 20
 	r += 1
 
 	randcourse = rand(6..12)
