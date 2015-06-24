@@ -198,6 +198,7 @@ $fluidGridGutterWidth:    2.127659574%;
 /* get bootstrap */
 /* ========================================================== */
 @import "bootstrap";
+@import "bootstrap-responsive";
 
 @mixin box_sizing {
   -moz-box-sizing: border-box; 
@@ -222,7 +223,6 @@ body {
 
 #sitewidth {
   height: 1px;
-  width: 980px;
 }
 
 section {
@@ -248,11 +248,13 @@ section {
 .herocontainer {
   background-image: image-url("bg.png");
   text-align: center;
+  padding-right: 20px; 
+  padding-left: 20px;
 }
 
 .maincontainer {
-  padding: 50px 0 210px 0;
-  background: #f6f9e6;
+  padding: 50px 0 50px 0;
+  background: #fafbf2;
 }
 
 .footercontainer {
@@ -284,6 +286,8 @@ section {
 
 #homeblurb {
   text-align: center;
+  padding-right: 20px; 
+  padding-left: 20px;
 }
 
 .center {
@@ -459,12 +463,11 @@ p {
 }
 
 .hero-unit {
-  padding: 50px;
   margin: 0;
-  height: 200px;
-  text-align: left;
-  background-image: image-url("mainart.png");
-  background-repeat: none;
+  padding: 0 20px 0 20px;
+  height: 250px;
+  background: url("mainart.png") no-repeat center center; 
+  background-size: contain;
   h1 {
     font-size: 60px;
     line-height: 1;
@@ -482,12 +485,11 @@ p {
 }
 
 .phoneart {
-  padding: 0px;
-  margin: 100px 0 0 0;
-  height: 540px;
-  text-align: left;
-  background-image: image-url("wormburner_sitepromo.png");
-  background-repeat: none;
+  margin: 0;
+  padding: 0 20px 0 20px;
+  height: 2800px;
+  background: url("wormburner_sitepromo.png") no-repeat top center; 
+  background-size: contain;
 }
 
 
@@ -495,6 +497,8 @@ p {
 /* ========================================================== */
 footer {
   padding-top: 20px;
+  padding-right: 20px; 
+  padding-left: 20px;
   color: #ffffff;
   font-size: .9em;
 }

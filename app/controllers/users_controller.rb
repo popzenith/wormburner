@@ -222,8 +222,8 @@ class UsersController < ApplicationController
     <p>Hello #{@email}!</p>
     <p>Download your WormBurner stats visualization here:<br/>
     #{@pdfurl}</p>
-    <p>This poster is 24in x 36in, but it will also look good at smaller sizes.</p>
-    <p>Keep playing and get some more birdies on there!</p>"
+    <p>This poster is 24in x 36in, but it will also look good at smaller sizes.<br/>
+    Keep playing and get some more birdies on there!</p>"
 
     # send email
     @sendmessage = Message.new(@message)
