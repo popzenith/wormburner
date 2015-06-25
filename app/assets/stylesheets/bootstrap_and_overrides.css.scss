@@ -464,10 +464,8 @@ p {
 
 .hero-unit {
   margin: 0;
-  padding: 0 20px 0 20px;
-  height: 250px;
-  background: url("mainart.png") no-repeat center center; 
-  background-size: contain;
+  padding: 30px 20px 30px 20px;
+  background-image: image-url("bg.png");
   h1 {
     font-size: 60px;
     line-height: 1;
@@ -487,9 +485,7 @@ p {
 .phoneart {
   margin: 0;
   padding: 0 20px 0 20px;
-  height: 2800px;
-  background: url("wormburner_sitepromo.png") no-repeat top center; 
-  background-size: contain;
+  text-align: center;
 }
 
 
@@ -501,6 +497,7 @@ footer {
   padding-left: 20px;
   color: #ffffff;
   font-size: .9em;
+  text-align: center;
 }
 
 footer a {
@@ -514,7 +511,7 @@ footer a:hover {
 }
 
 footer #footerright {
-  float: right;
+  
 }
 
 
