@@ -34,7 +34,7 @@ class FacilitiesController < ApplicationController
     if params[:search].nil?
       @facilities = []
     else 
-      @facilities = Facility.limit(50).search(params[:search])
+      @facilities = Facility.by_distance(:origin => [params[:latitude],params[:longitude]]).limit(50).search(params[:search])
       #@facilities = Facility.where('lower(facility_name) LIKE ?', params[:search]).limit(50)
       if @facilities.nil?
         @facilities = []
