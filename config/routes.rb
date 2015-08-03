@@ -73,6 +73,11 @@ WormBurner::Application.routes.draw do
   match 'bookteetimes' => 'bookteetimes#newfull', :as => 'bookteetimes', :via => :get
 
   #########################################
+  # poster
+  #########################################
+  match 'getaposter' => 'static_pages#getaposter', :as => 'getaposter', :via => :get
+
+  #########################################
   # match defines a url directly 
   # these are the static pages
   #########################################
