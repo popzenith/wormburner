@@ -135,8 +135,8 @@ $hrBorder:                $grayLighter;
 // Navbar
 // -------------------------
 $navbarHeight:                    40px;
-$navbarBackground:                $grayDarker;
-$navbarBackgroundHighlight:       $grayDark;
+$navbarBackground:                $grayLighter;
+$navbarBackgroundHighlight:       $grayLighter;
 
 $navbarText:                      $grayLight;
 $navbarLinkColor:                 $linkColor;
@@ -265,25 +265,6 @@ section {
   width: 300px;
 }
 
-.maincta {
-  margin: 20px 0 0 0;
-  text-align: center;
-}
-
-.appbuttoncontainer {
-  width: 100%;
-  margin: 10px 0 20px 0;
-  text-align: center;
-}
-
-.appbutton {
-  margin: 0;
-  background-image: image-url("appstore.png");
-  width: 135px;
-  height: 40px;
-  text-align: center;
-}
-
 #homeblurb {
   text-align: center;
   padding-right: 20px; 
@@ -330,6 +311,20 @@ section {
   background-repeat: repeat-x;
 }
 
+.maincta {
+  margin: 20px 0 20px 0;
+  width: 100%;
+  text-align: center;
+}
+
+.btn-ios {
+  width: 135px;
+  height: 40px;
+  text-align: center;
+  background-image: image-url("Download_on_the_App_Store_Badge_US-UK_135x40.svg");
+  margin: auto;
+}
+
 .divider {
   margin: 30px 0 0 0;
   height: 30px;
@@ -369,16 +364,18 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: 3em;
+  font-size: 2.75em;
   letter-spacing: 0px;
   margin-top: 0px;
   margin-bottom: 30px;
   text-align: center;
   color: #555555;
+  font-weight: 100;
+  line-height: 1.3em;
 }
 
 h2 {
-  font-size: 2.2em;
+  font-size: 1.8em;
   letter-spacing: 0px;
   margin-top: 0px;
   margin-bottom: 30px;
@@ -387,6 +384,8 @@ h2 {
   border-bottom: 1px dotted #999;
   margin: 0 0 20px 0;
   padding: 0 0 30px 0;
+  font-weight: 100;
+  line-height: 1.5em;
 }
 
 h3 {
@@ -488,10 +487,31 @@ p {
   text-align: center;
 }
 
+.posterartcontain {
+  margin: 0;
+  padding: 0 20px 50px 20px;
+  text-align: center;
+}
+
 .posterart {
   margin: 0;
-  padding: 0 20px 100px 20px;
+  padding: 0;
   text-align: center;
+  border: 1px solid #eee;
+}
+
+.rorygraphicartcontain {
+  margin: 0;
+  padding: 50px 20px 100px 20px;
+  text-align: center;
+}
+
+.rorygraphicart {
+  margin: 0;
+  padding: 20px;
+  text-align: center;
+  background: #fff;
+  border: 1px solid #eee;
 }
 
 

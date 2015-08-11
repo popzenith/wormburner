@@ -75,7 +75,7 @@ WormBurner::Application.routes.draw do
   #########################################
   # poster
   #########################################
-  match 'getaposter' => 'static_pages#getaposter', :as => 'getaposter', :via => :get
+  match 'rorymcilroy' => 'rorymcilroy#new', :as => 'rorymcilroy', :via => :get
 
   #########################################
   # match defines a url directly 
