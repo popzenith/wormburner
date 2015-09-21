@@ -1,47 +1,21 @@
 <% if user_signed_in? %>
-  <div class="headercontainer">
-    <header class="navbar navbar-fixed-top">
-      <nav class="navbar-inner">
-        <div class="container">
+  <div class="herocontainer">
+    <div id="main" role="main">
+      <div class="container">
+        <div class="content">
           <div class="row">
             <div class="span10 offset1">
-              <div class="logocontainer"><%= link_to "", root_path, { :id => 'logo', :alt => 'WormBurner' } %></div>
-              <ul class="nav">
-                <li>
-                  <%= link_to 'Sign Out', destroy_user_session_path, :method=>'delete' %>        
-                </li>
-                <li>
-                  <%= link_to "My Profile", root_path %>
-                </li>
-                <% if current_user.has_role? :admin %>
-                  <li>
-                    <%= link_to 'Admin', users_path %>
-                  </li>
-                <% end %>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </nav>
-    </header>
-  </div>
-<% else %>
-  <%- if controller_name != 'home' %>
-    <div class="headercontainer">
-      <header class="navbar navbar-fixed-top">
-        <nav class="navbar-inner">
-          <div class="container">
-            <div class="row">
-              <div class="span10 offset1">
-                <div class="logocontainer"><a href="/"><div class="logo"></div></a></div>
+              <div class="center hero-unit">
+                <%= image_tag("mainart.png", alt: "WormBurner", class:'img-responsive') %>
               </div>
             </div>
           </div>
-        </nav>
-      </header>
+        </div>
+      </div>
     </div>
-  <% else -%>
-    <div class="herocontainer">
+  </div>
+<% else %>
+  <div class="herocontainer">
       <div id="main" role="main">
         <div class="container">
           <div class="content">
@@ -56,5 +30,4 @@
         </div>
       </div>
     </div>
-  <% end -%>
 <% end %>
