@@ -76,6 +76,7 @@ WormBurner::Application.routes.draw do
   # poster
   #########################################
   match 'rorymcilroy' => 'rorymcilroy#new', :as => 'rorymcilroy', :via => :get
+  match 'jordanspieth' => 'jordanspieth#new', :as => 'jordanspieth', :via => :get
 
   #########################################
   # match defines a url directly 
