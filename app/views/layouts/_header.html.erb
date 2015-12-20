@@ -4,11 +4,13 @@
       <div class="container">
         <div class="content">
           <div class="row">
-            <div class="span10 offset1">
-              <div class="center hero-unit">
-                <%= image_tag("mainart.png", alt: "WormBurner", class:'img-responsive') %>
+            <a href="/">
+              <div class="span10 offset1">
+                <div class="center hero-unit">
+                  <%= image_tag("mainart.png", alt: "WormBurner", class:'img-responsive') %>
+                </div>
               </div>
-            </div>
+            </a>
           </div>
         </div>
       </div>
@@ -16,18 +18,20 @@
   </div>
 <% else %>
   <div class="herocontainer">
-      <div id="main" role="main">
-        <div class="container">
-          <div class="content">
-            <div class="row">
+    <div id="main" role="main">
+      <div class="container">
+        <div class="content">
+          <div class="row">
+            <a href="/">
               <div class="span10 offset1">
                 <div class="center hero-unit">
                   <%= image_tag("mainart.png", alt: "WormBurner", class:'img-responsive') %>
                 </div>
               </div>
-            </div>
+            </a>
           </div>
         </div>
       </div>
     </div>
+  </div>
 <% end %>
