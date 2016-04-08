@@ -225,12 +225,11 @@ class UsersController < ApplicationController
     <p>This poster is 24in x 36in, but it will also look good at smaller sizes.<br/>
     Keep playing and get some more birdies on there!</p>"
 
-    mail(
-      :subject => @message[:subject],
-      :to      => @message[:email],
-      :from    => "WormBurner <wormburner@popzenith.com>",
-      :body    => @message[:body]
-    )
+    # send email
+    @sendmessage = Message.new(@message)
+    if @sendmessage.valid?
+      PosterMailer.new_message(@sendmessage).deliver
+    end 
     
     respond_to do |format|
       format.html # index.html.erb
