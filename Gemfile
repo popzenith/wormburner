@@ -45,3 +45,5 @@ end
 gem 'smarter_csv', '~> 1.0.17' 
 
 gem 'geokit-rails'
+
+gem 'postmark-rails', '>= 0.10.0'
