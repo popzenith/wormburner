@@ -176,6 +176,7 @@ DEPENDENCIES
   geokit-rails
   hirb
   jquery-rails
+  mail
   mandrill-api
   paperclip (~> 3.1)
   pg
